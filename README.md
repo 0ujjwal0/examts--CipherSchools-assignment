@@ -35,22 +35,25 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/0ujjwal0/examts-CipherSchools_assignment.git
    cd your-repo-name
    ```
 
 2. **Install dependencies**:
    ```bash
-   npm install
+   cd frontend
+   npm i
+   npm start
+   ```
+   open a new terminal or split terminal
+   ```bash
+   cd backend
+   npm i
+   npm start
    ```
 
 3. **Set up environment variables**:
-   Create a `.env` file in the root directory and add the necessary environment variables as per the `.env.example` file.
-
-4. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
+   .env file is already added as the environment variable.
 
 ## **Usage**
 
@@ -61,15 +64,12 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 
 ## **Screenshots**
 
-_Add screenshots of your application here to showcase the UI and key features._
+available soon!
 
 ## **Contributing**
 
 We welcome contributions from the community. If you find a bug or have a feature request, please create an issue or submit a pull request.
 
-## **License**
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## **Contact**
 
