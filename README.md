@@ -54,6 +54,8 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 
 3. **Set up environment variables**:
    .env file is already added as the environment variable.
+4. **To see the API documentation**:
+   after running the project go to this link-> http://localhost:5000/api-docs
 
 ## **Usage**
 
@@ -73,4 +75,4 @@ We welcome contributions from the community. If you find a bug or have a feature
 
 ## **Contact**
 
-For any queries or support, feel free to contact us at your-email@example.com.
+For any queries or support, feel free to contact us at ujjwalsangwan2003@example.com.
