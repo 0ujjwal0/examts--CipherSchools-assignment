@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar";
@@ -19,103 +19,9 @@ const StartTest = () => {
   const [markedForReview, setMarkedForReview] = useState({});
   const [title, setTitle] = useState("");
 
-  useEffect(() => {
-    const fetchTestDetails = async () => {
-      try {
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        const token = userData?.token;
+  const intervalRef = useRef(null);
 
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        const response = await axios.get(
-          `http://localhost:5000/api/tests/${testId}`,
-          config
-        );
-        setQuestions(response.data.questions);
-        setTitle(response.data.title);
-
-        const storedData = JSON.parse(localStorage.getItem("testData"));
-        if (storedData && storedData.testId === testId) {
-          setTimeLeft(storedData.timeLeft);
-        } else {
-          setTimeLeft(3600 * 1000);
-        }
-
-        const saveDataInterval = setInterval(() => {
-          localStorage.setItem(
-            "testData",
-            JSON.stringify({
-              testId,
-              timeLeft,
-            })
-          );
-        }, 30000);
-
-        return () => clearInterval(saveDataInterval);
-      } catch (error) {
-        console.error("Error fetching test details:", error);
-      }
-    };
-
-    fetchTestDetails();
-  }, [testId]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => {
-        if (prevTimeLeft <= 0) {
-          clearInterval(intervalId);
-          handleSubmitTest();
-          return 0;
-        }
-        return prevTimeLeft - 1000;
-      });
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const handleAnswerChange = (questionId, option) => {
-    setSelectedAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [questionId]: option,
-    }));
-  };
-
-  const handleNavigation = (direction) => {
-    setCurrentQuestionIndex((prevIndex) => {
-      const newIndex = direction === "next" ? prevIndex + 1 : prevIndex - 1;
-      return Math.max(0, Math.min(newIndex, questions.length - 1));
-    });
-  };
-
-  const handleQuestionClick = (index) => {
-    setCurrentQuestionIndex(index);
-  };
-
-  const handleMarkForReview = () => {
-    setMarkedForReview((prevReview) => ({
-      ...prevReview,
-      [currentQuestionIndex]: !prevReview[currentQuestionIndex],
-    }));
-  };
-useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = "Are you sure you want to leave? Your progress will be lost.";
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-  const handleSubmitTest = async () => {
+  const handleSubmitTest = useCallback(async () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const token = userData?.token;
 
@@ -149,7 +55,108 @@ useEffect(() => {
     } catch (error) {
       console.error("Error submitting test:", error);
     }
+  }, [selectedAnswers, testId, navigate]);
+
+  useEffect(() => {
+    const fetchTestDetails = async () => {
+      try {
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        const token = userData?.token;
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const response = await axios.get(
+          `http://localhost:5000/api/tests/${testId}`,
+          config
+        );
+        setQuestions(response.data.questions);
+        setTitle(response.data.title);
+
+        const storedData = JSON.parse(localStorage.getItem("testData"));
+        if (storedData && storedData.testId === testId) {
+          setTimeLeft(storedData.timeLeft);
+        } else {
+          setTimeLeft(3600 * 1000);
+        }
+      } catch (error) {
+        console.error("Error fetching test details:", error);
+      }
+    };
+
+    fetchTestDetails();
+  }, [testId]);
+
+  useEffect(() => {
+    const saveDataInterval = setInterval(() => {
+      localStorage.setItem(
+        "testData",
+        JSON.stringify({
+          testId,
+          timeLeft,
+        })
+      );
+    }, 30000);
+
+    return () => clearInterval(saveDataInterval);
+  }, [testId, timeLeft]);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setTimeLeft((prevTimeLeft) => {
+        if (prevTimeLeft <= 0) {
+          clearInterval(intervalRef.current);
+          handleSubmitTest();
+          return 0;
+        }
+        return prevTimeLeft - 1000;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [handleSubmitTest]);
+
+  const handleAnswerChange = (questionId, option) => {
+    setSelectedAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: option,
+    }));
   };
+
+  const handleNavigation = (direction) => {
+    setCurrentQuestionIndex((prevIndex) => {
+      const newIndex = direction === "next" ? prevIndex + 1 : prevIndex - 1;
+      return Math.max(0, Math.min(newIndex, questions.length - 1));
+    });
+  };
+
+  const handleQuestionClick = (index) => {
+    setCurrentQuestionIndex(index);
+  };
+
+  const handleMarkForReview = () => {
+    setMarkedForReview((prevReview) => ({
+      ...prevReview,
+      [currentQuestionIndex]: !prevReview[currentQuestionIndex],
+    }));
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue =
+        "Are you sure you want to leave? Your progress will be lost.";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   if (questions.length === 0) {
     return <div>Loading...</div>;
