@@ -1,5 +1,5 @@
 
-# **Test Environment Platform**
+# **Examts - A Test Environment Platform**
 
 ## **Overview**
 
@@ -36,7 +36,6 @@ you just need node as everything else had been already set up for you!!
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/0ujjwal0/examts-CipherSchools_assignment.git
-   cd your-repo-name
    ```
 
 2. **Install dependencies**:
