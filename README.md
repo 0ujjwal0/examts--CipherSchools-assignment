@@ -17,7 +17,7 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 - **Full-Screen Mode**: Tests are conducted in full-screen mode to prevent distractions and ensure focus.
 - **Submission and Results**: Users receive their results via email after the test is graded.
 
-## **Project Structure**
+## **Project Technologies**
 
 - **Frontend**: Built with React.js, it provides a dynamic and responsive user interface.
 - **Backend**: Developed with Node.js and Express, it handles API requests, authentication, and data management.
@@ -29,7 +29,7 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 ### **Prerequisites**
 
 - **Node.js**: Ensure you have Node.js installed on your system.
-- **MongoDB**: Set up a MongoDB database.
+you just need node as everything else had been already set up for you!!
 
 ### **Installation**
 
@@ -63,10 +63,6 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 2. **Start a Test**: Navigate to the test page, review instructions, and begin the test.
 3. **Answer Questions**: Select answers, mark questions for review, and submit the test when done.
 4. **Receive Results**: Users will receive their test results via email after grading.
-
-## **Screenshots**
-
-available soon!
 
 ## **Contributing**
 
