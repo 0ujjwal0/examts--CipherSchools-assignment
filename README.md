@@ -17,6 +17,9 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 - **Full-Screen Mode**: Tests are conducted in full-screen mode to prevent distractions and ensure focus.
 - **Submission and Results**: Users receive their results via email after the test is graded.
 
+## **Real Time Email**
+![email](https://github.com/0ujjwal0/examts-CipherSchools_assignment/blob/main/frontend/public/email%20screenshot.png)
+
 ## **Project Technologies**
 
 - **Frontend**: Built with React.js, it provides a dynamic and responsive user interface.
