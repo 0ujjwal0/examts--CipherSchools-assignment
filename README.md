@@ -1,5 +1,5 @@
 
-# **Test Environment Platform**
+# **Examts - A Test Environment Platform**
 
 ## **Overview**
 
@@ -17,7 +17,10 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 - **Full-Screen Mode**: Tests are conducted in full-screen mode to prevent distractions and ensure focus.
 - **Submission and Results**: Users receive their results via email after the test is graded.
 
-## **Project Structure**
+## **Real Time Email**
+![email](https://github.com/0ujjwal0/examts-CipherSchools_assignment/blob/main/frontend/public/email%20screenshot.png)
+
+## **Project Technologies**
 
 - **Frontend**: Built with React.js, it provides a dynamic and responsive user interface.
 - **Backend**: Developed with Node.js and Express, it handles API requests, authentication, and data management.
@@ -29,28 +32,32 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 ### **Prerequisites**
 
 - **Node.js**: Ensure you have Node.js installed on your system.
-- **MongoDB**: Set up a MongoDB database.
+you just need node as everything else had been already set up for you!!
 
 ### **Installation**
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/0ujjwal0/examts-CipherSchools_assignment.git
    ```
 
 2. **Install dependencies**:
    ```bash
-   npm install
+   cd frontend
+   npm i
+   npm start
+   ```
+   open a new terminal or split terminal
+   ```bash
+   cd backend
+   npm i
+   npm start
    ```
 
 3. **Set up environment variables**:
-   Create a `.env` file in the root directory and add the necessary environment variables as per the `.env.example` file.
-
-4. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
+   .env file is already added as the environment variable.
+4. **To see the API documentation**:
+   after running the project go to this link-> http://localhost:5000/api-docs
 
 ## **Usage**
 
@@ -59,18 +66,11 @@ The Test Environment Platform is a comprehensive solution designed for creating,
 3. **Answer Questions**: Select answers, mark questions for review, and submit the test when done.
 4. **Receive Results**: Users will receive their test results via email after grading.
 
-## **Screenshots**
-
-_Add screenshots of your application here to showcase the UI and key features._
-
 ## **Contributing**
 
 We welcome contributions from the community. If you find a bug or have a feature request, please create an issue or submit a pull request.
 
-## **License**
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## **Contact**
 
-For any queries or support, feel free to contact us at your-email@example.com.
+For any queries or support, feel free to contact us at ujjwalsangwan2003@example.com.
